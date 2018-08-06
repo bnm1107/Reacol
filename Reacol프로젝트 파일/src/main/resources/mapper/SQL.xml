@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.test.ex.MemberDAO">
+	<resultMap type="com.test.ex.MemberDTO" id="resultlist">
+		<result property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="password" column="password"/>
+		<result property="email" column="email"/>
+	</resultMap>
+	
+	<insert id="insert" parameterType="com.test.ex.MemberDTO">
+		insert into member(id, name, password, email) values(#{id}, #{name}, #{password}, #{email})
+	</insert>
+	
+	<select id="selectMember" parameterType="java.lang.String" resultType="java.lang.String">
+		select * from member where id=#{id}
+	</select>
+	
+	<select id="LoginMember" parameterType="String" resultType="com.test.ex.MemberDTO">
+		select * from member where id=#{id}
+	</select>
+	
+	<select id="loginProcess" resultType="com.test.ex.MemberDTO">
+		select * from member where id= #{id} and password = #{password}
+	</select>
+	
+	<select id="memberSelect" resultType="com.test.ex.MemberDTO">
+		select id, name, password, email
+		from member
+	</select>
+	
+	<select id="selectMemberOne" parameterType="String" resultType="com.test.ex.MemberDTO">
+		select * from member where id=#{id}
+	</select>
+	
+	<update id="modifyMember" parameterType="com.test.ex.MemberDTO">
+		update member set name = #{name}, password = #{password}, email = #{email}
+		where id = #{id}
+	</update>
+	<delete id="deleteMember" parameterType="String">
+	 delete from member where id = #{id}
+	</delete>
+	</mapper>
